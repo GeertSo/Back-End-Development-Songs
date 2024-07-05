@@ -51,3 +51,16 @@ def parse_json(data):
 ######################################################################
 # INSERT CODE HERE
 ######################################################################
+
+@app.route("/health")
+def health():
+    return {'status':'OK'}, 200
+
+@app.route("/count")
+def count_songs():
+    try:
+        cnt = db.songs.count_documents({})
+        return {'count': cnt}, 200
+    except:
+        return {"message": "no valid database"}, 500
+
